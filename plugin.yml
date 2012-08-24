@@ -1,0 +1,19 @@
+name: IPAuth
+author: Ramirez57
+description: Stores IP of players for authentication.
+main: ramirez57.IPAuth.Main
+version: 0.1_MC1.3.1_R2.0
+commands:
+  ipauth:
+    description: IPAuth commands
+    usage: '/ipauth reload'
+    aliases: ipa
+    permission: IPAuth.reload
+    permission-message: No permission for IPAuth
+permissions:
+  IPAuth.bypass:
+    description: Bypass the IP check for a player. (unsafe)
+    default: false
+  IPAuth.reload:
+    description: Reload IPAuth logins and configuration.
+    default: op
