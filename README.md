@@ -1,0 +1,1 @@
+IPAuth authorizes players based on their Internet Protocol address.
