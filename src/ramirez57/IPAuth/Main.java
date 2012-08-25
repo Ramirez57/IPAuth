@@ -84,17 +84,18 @@ public class Main extends JavaPlugin implements Listener {
 	public void checkIP(PlayerLoginEvent event) {
 		Player player = event.getPlayer();
 		String name = player.getDisplayName();
+		String _name = name.toLowerCase();
 		String ip = event.getAddress().getHostAddress();
 		if(player.hasPermission("IPAuth.bypass")) {
 			logger.info("Allowing " + name + " (Has bypass permission)");
 			return;
 		}
-		if(logins.getString(name) == null || logins.getString(name) == "") {
-			logins.set(name, ip);
+		if(logins.getString(_name) == null || logins.getString(_name) == "") {
+			logins.set(_name, ip);
 			savelogins();
 		}
-		if(logins.getString(name).equals(ip)) {
-			logger.info("Allowing " + name + " (" + ip + " / " + logins.getString(name) + ")" );
+		if(logins.getString(_name).equals(ip)) {
+			logger.info("Allowing " + name + " (" + ip + " / " + logins.getString(_name) + ")" );
 			return;
 		} else {
 			event.disallow(PlayerLoginEvent.Result.KICK_OTHER, config.getString("kickreason"));
