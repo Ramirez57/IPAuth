@@ -1,4 +1,5 @@
 IPAuth authorizes players based on their Internet Protocol address.
+
 ChangeLog
 B0.1 -
 * Initial release.
