@@ -1,1 +1,3 @@
 kickreason: "Wrong IP or name is in use."
+kickaccount: "This IP has too many accounts."
+max_accounts: 0

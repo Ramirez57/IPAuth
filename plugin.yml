@@ -2,7 +2,7 @@ name: IPAuth
 author: Ramirez57
 description: Stores IP of players for authentication.
 main: ramirez57.IPAuth.Main
-version: 0.1_MC1.3.1_R2.0
+version: 0.2_MC1.3.1_R2.0
 commands:
   ipauth:
     description: IPAuth commands

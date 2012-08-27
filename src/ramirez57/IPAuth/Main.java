@@ -2,6 +2,7 @@ package ramirez57.IPAuth;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collection;
 import java.util.logging.Logger;
 
 import org.bukkit.ChatColor;
@@ -83,7 +84,7 @@ public class Main extends JavaPlugin implements Listener {
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void checkIP(PlayerLoginEvent event) {
 		Player player = event.getPlayer();
-		String name = player.getDisplayName();
+		String name = player.getName();
 		String _name = name.toLowerCase();
 		String ip = event.getAddress().getHostAddress();
 		if(player.hasPermission("IPAuth.bypass")) {
@@ -91,8 +92,18 @@ public class Main extends JavaPlugin implements Listener {
 			return;
 		}
 		if(logins.getString(_name) == null || logins.getString(_name) == "") {
-			logins.set(_name, ip);
-			savelogins();
+			Collection<Object> counting = logins.getValues(true).values();
+			int count = 0;
+			while(counting.contains(ip)) {
+				count++;counting.remove(ip);
+			}
+			if(count < config.getInt("max_accounts") || config.getInt("max_accounts") < 1) {
+				logins.set(_name, ip);
+				savelogins();
+			} else {
+				event.disallow(PlayerLoginEvent.Result.KICK_OTHER, config.getString("kickaccount"));
+				return;
+			}
 		}
 		if(logins.getString(_name).equals(ip)) {
 			logger.info("Allowing " + name + " (" + ip + " / " + logins.getString(_name) + ")" );
